@@ -300,6 +300,81 @@
     });
   }
   
+  // Image Lazy Loading & Optimization
+  // ========================================================================
+  
+  /**
+   * Initialize lazy loading for images
+   * Uses Intersection Observer API for efficient lazy loading
+   */
+  function initLazyLoading() {
+    // Check if Intersection Observer is supported
+    if (!('IntersectionObserver' in window)) {
+      // Fallback: load all images immediately
+      document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+        if (img.dataset.src) {
+          img.src = img.dataset.src;
+        }
+      });
+      return;
+    }
+    
+    // Create intersection observer
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          
+          // Load the image
+          if (img.dataset.src) {
+            img.src = img.dataset.src;
+          }
+          
+          // Load srcset if available
+          if (img.dataset.srcset) {
+            img.srcset = img.dataset.srcset;
+          }
+          
+          // Remove loading class and add loaded class
+          img.classList.remove('lazy-loading');
+          img.classList.add('lazy-loaded');
+          
+          // Stop observing this image
+          observer.unobserve(img);
+        }
+      });
+    }, {
+      // Load images 50px before they enter viewport
+      rootMargin: '50px 0px',
+      threshold: 0.01
+    });
+    
+    // Observe all lazy images
+    document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+      imageObserver.observe(img);
+    });
+  }
+  
+  /**
+   * Add fade-in animation for loaded images
+   */
+  function enhanceImageLoading() {
+    document.querySelectorAll('img').forEach(img => {
+      if (img.complete) {
+        img.classList.add('loaded');
+      } else {
+        img.addEventListener('load', () => {
+          img.classList.add('loaded');
+        });
+        img.addEventListener('error', () => {
+          img.classList.add('error');
+          // Optionally show placeholder
+          console.warn(`Failed to load image: ${img.src}`);
+        });
+      }
+    });
+  }
+  
   // Initialization
   // ========================================================================
   
@@ -312,6 +387,8 @@
     initKeyboardNav();
     initSkipLink();
     updateActiveNav();
+    initLazyLoading();
+    enhanceImageLoading();
     
     console.log('From The Field: JavaScript initialized');
   }

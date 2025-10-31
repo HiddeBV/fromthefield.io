@@ -1,0 +1,84 @@
+---
+layout: null
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" 
+     xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/"
+     xmlns:atom="http://www.w3.org/2005/Atom"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>{{ site.title | xml_escape }}</title>
+    <link>{{ site.url }}</link>
+    <atom:link href="{{ '/feed.xml' | absolute_url }}" rel="self" type="application/rss+xml"/>
+    <description>{{ site.description | xml_escape }}</description>
+    <language>en-us</language>
+    <copyright>© {% assign year = 'now' | date: '%Y' %}{{ year }} {{ site.title }}</copyright>
+    <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
+    <pubDate>{{ site.time | date_to_rfc822 }}</pubDate>
+    <ttl>60</ttl>
+    
+    <!-- iTunes Podcast Tags -->
+    <itunes:author>{{ site.podcast.author | xml_escape }}</itunes:author>
+    <itunes:summary>{{ site.description | xml_escape }}</itunes:summary>
+    <itunes:subtitle>{{ site.podcast.subtitle | xml_escape }}</itunes:subtitle>
+    <itunes:owner>
+      <itunes:name>{{ site.podcast.author | xml_escape }}</itunes:name>
+      <itunes:email>{{ site.podcast.email | xml_escape }}</itunes:email>
+    </itunes:owner>
+    <itunes:image href="{{ '/assets/images/podcast-cover.jpg' | absolute_url }}"/>
+    <itunes:category text="Technology"/>
+    <itunes:category text="Business">
+      <itunes:category text="Careers"/>
+    </itunes:category>
+    <itunes:explicit>no</itunes:explicit>
+    <itunes:type>episodic</itunes:type>
+    
+    <image>
+      <url>{{ '/assets/images/podcast-cover.jpg' | absolute_url }}</url>
+      <title>{{ site.title | xml_escape }}</title>
+      <link>{{ site.url }}</link>
+    </image>
+    
+    {% assign episodes = site.data.episodes | sort: 'date' | reverse %}
+    {% for episode in episodes limit:50 %}
+    <item>
+      <title>{{ episode.title | xml_escape }}</title>
+      <link>{{ '/episode.html' | absolute_url }}?id={{ episode.id }}</link>
+      <guid isPermaLink="false">{{ site.url }}/episode/{{ episode.id }}</guid>
+      <pubDate>{{ episode.date | date_to_rfc822 }}</pubDate>
+      <description><![CDATA[{{ episode.description | markdownify }}]]></description>
+      <content:encoded><![CDATA[{{ episode.show_notes | markdownify }}]]></content:encoded>
+      
+      <!-- iTunes Episode Tags -->
+      <itunes:title>{{ episode.title | xml_escape }}</itunes:title>
+      <itunes:author>{{ site.podcast.author | xml_escape }}</itunes:author>
+      <itunes:subtitle>{{ episode.description | truncate: 255 | xml_escape }}</itunes:subtitle>
+      <itunes:summary><![CDATA[{{ episode.description }}]]></itunes:summary>
+      <itunes:image href="{{ episode.image | default: '/assets/images/podcast-cover.jpg' | absolute_url }}"/>
+      <itunes:duration>{{ episode.duration }}</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      {% if episode.episode_number %}<itunes:episode>{{ episode.episode_number }}</itunes:episode>{% endif %}
+      {% if episode.season %}<itunes:season>{{ episode.season }}</itunes:season>{% endif %}
+      <itunes:episodeType>full</itunes:episodeType>
+      
+      <!-- Audio Enclosure -->
+      {% if episode.audio_url %}
+      <enclosure url="{{ episode.audio_url }}" 
+                 length="{{ episode.audio_size | default: 0 }}" 
+                 type="audio/mpeg"/>
+      <media:content url="{{ episode.audio_url }}" 
+                     type="audio/mpeg" 
+                     medium="audio"/>
+      {% endif %}
+      
+      <!-- Categories/Topics -->
+      {% for topic_id in episode.topics %}
+        {% assign topic = site.data.topics | where: 'id', topic_id | first %}
+        {% if topic %}<category>{{ topic.name | xml_escape }}</category>{% endif %}
+      {% endfor %}
+    </item>
+    {% endfor %}
+  </channel>
+</rss>

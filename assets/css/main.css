@@ -556,3 +556,344 @@ a:focus-visible {
     content: " (" attr(href) ")";
   }
 }
+
+/* ==========================================================================
+   Homepage Styles
+   ========================================================================== */
+
+/* Hero Section */
+.hero {
+  background: var(--color-bg-secondary);
+  padding: var(--spacing-3xl) 0;
+  text-align: center;
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero-title {
+  font-size: var(--font-size-h1);
+  margin-bottom: var(--spacing-md);
+  color: var(--color-text-primary);
+}
+
+.hero-tagline {
+  font-size: var(--font-size-xl);
+  color: var(--color-accent);
+  font-weight: 600;
+  margin-bottom: var(--spacing-lg);
+}
+
+.hero-description {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  margin-bottom: var(--spacing-xl);
+}
+
+/* Section Titles */
+.section-title {
+  font-size: var(--font-size-h2);
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+  color: var(--color-text-primary);
+}
+
+/* Latest Episode Section */
+.latest-episode {
+  padding: var(--spacing-3xl) 0;
+}
+
+/* Loading & Error States */
+.loading-state,
+.error-state {
+  text-align: center;
+  padding: var(--spacing-3xl);
+}
+
+.spinner {
+  border: 3px solid var(--color-border);
+  border-top: 3px solid var(--color-accent);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto var(--spacing-md);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.error-message {
+  color: var(--color-error);
+  font-size: var(--font-size-lg);
+}
+
+/* Episode Card */
+.episode-card {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl);
+  background: var(--color-card-bg);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: 0 2px 8px var(--color-card-shadow);
+  transition: transform var(--transition-speed) var(--transition-easing),
+              box-shadow var(--transition-speed) var(--transition-easing);
+}
+
+.episode-card.latest {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .episode-card.latest {
+    grid-template-columns: 300px 1fr;
+  }
+}
+
+.episode-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px var(--color-card-shadow);
+}
+
+/* Episode Image */
+.episode-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--color-bg-secondary);
+}
+
+.episode-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.episode-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Episode Content */
+.episode-content {
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.episode-meta {
+  display: flex;
+  gap: var(--spacing-md);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  flex-wrap: wrap;
+}
+
+.episode-date,
+.episode-duration {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.episode-date::before {
+  content: "📅";
+}
+
+.episode-duration::before {
+  content: "⏱️";
+}
+
+.episode-title {
+  font-size: var(--font-size-h3);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.episode-title a {
+  color: var(--color-text-primary);
+  text-decoration: none;
+}
+
+.episode-title a:hover {
+  color: var(--color-accent);
+}
+
+.episode-description {
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Episode Topics */
+.episode-topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+}
+
+.topic-tag {
+  display: inline-block;
+  padding: 4px 12px;
+  background: var(--color-accent);
+  color: white;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+/* Audio Player */
+.audio-player {
+  margin: var(--spacing-md) 0;
+}
+
+.spotify-player iframe {
+  border-radius: var(--border-radius);
+  width: 100%;
+}
+
+.player-fallback {
+  padding: var(--spacing-lg);
+  background: var(--color-bg-secondary);
+  border-radius: var(--border-radius);
+  text-align: center;
+}
+
+.fallback-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.fallback-message svg {
+  flex-shrink: 0;
+}
+
+.fallback-message a {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+/* Episode Actions */
+.episode-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  text-decoration: none;
+  transition: all var(--transition-speed) var(--transition-easing);
+  border: none;
+  cursor: pointer;
+  font-size: var(--font-size-base);
+  min-height: 44px;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: var(--color-accent);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--color-accent-hover);
+  color: white;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--color-accent);
+  border: 2px solid var(--color-accent);
+}
+
+.btn-secondary:hover {
+  background: var(--color-accent);
+  color: white;
+}
+
+/* Subscription Buttons (Homepage Hero) */
+.hero .subscribe-buttons {
+  justify-content: center;
+  margin-top: var(--spacing-xl);
+}
+
+.subscribe-buttons .subscribe-btn {
+  width: auto;
+  min-width: 200px;
+}
+
+.btn-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* CTA Section */
+.cta-section {
+  background: var(--color-bg-secondary);
+  padding: var(--spacing-3xl) 0;
+  text-align: center;
+}
+
+.cta-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.cta-content h2 {
+  font-size: var(--font-size-h2);
+  margin-bottom: var(--spacing-md);
+}
+
+.cta-content p {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-xl);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .hero {
+    padding: var(--spacing-xl) 0;
+  }
+  
+  .episode-card {
+    gap: 0;
+  }
+  
+  .episode-image {
+    aspect-ratio: 16 / 9;
+  }
+  
+  .subscribe-buttons .subscribe-btn {
+    min-width: 100%;
+  }
+}

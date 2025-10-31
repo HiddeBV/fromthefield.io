@@ -1,0 +1,101 @@
+---
+layout: default
+title: Home
+description: From The Field - A technical podcast for developers, architects, and tech consultants. Listen to real conversations about cloud architecture, DevOps, platform engineering, and the consulting life.
+---
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <h1 class="hero-title">{{ site.title }}</h1>
+      <p class="hero-tagline">{{ site.tagline }}</p>
+      <p class="hero-description">
+        Real conversations about cloud architecture, DevOps, platform engineering, and life as a consultant in tech. 
+        Join us as we share lessons learned from the field, interview industry experts, and dive deep into the 
+        technologies and practices shaping modern software development.
+      </p>
+      
+      <!-- Subscription Buttons -->
+      {% include subscribe-buttons.html %}
+    </div>
+  </div>
+</section>
+
+<!-- Latest Episode Section -->
+<section class="latest-episode">
+  <div class="container">
+    <h2 class="section-title">Latest Episode</h2>
+    
+    <!-- Get latest episode from Jekyll data -->
+    {% assign sorted_episodes = site.data.episodes | sort: 'date' | reverse %}
+    {% assign latest = sorted_episodes[0] %}
+    
+    {% if latest %}
+      <article class="episode-card latest">
+        <div class="episode-image">
+          {% if latest.thumbnailUrl %}
+            <img src="{{ latest.thumbnailUrl }}" alt="{{ latest.title }}" loading="lazy">
+          {% else %}
+            <div class="episode-placeholder">
+              <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+                <rect width="100" height="100" fill="var(--color-bg-secondary)"/>
+                <text x="50" y="50" font-family="Arial" font-size="40" fill="var(--color-text-secondary)" text-anchor="middle" dominant-baseline="middle">🎙️</text>
+              </svg>
+            </div>
+          {% endif %}
+        </div>
+        
+        <div class="episode-content">
+          <div class="episode-meta">
+            <span class="episode-date">{{ latest.date | date: "%B %d, %Y" }}</span>
+            {% if latest.duration %}
+              <span class="episode-duration">{{ latest.duration }}</span>
+            {% endif %}
+          </div>
+          
+          <h3 class="episode-title">
+            <a href="/episode.html?id={{ latest.id }}">{{ latest.title }}</a>
+          </h3>
+          
+          <p class="episode-description">{{ latest.description }}</p>
+          
+          {% if latest.topics and latest.topics.size > 0 %}
+            <div class="episode-topics">
+              {% for topic_id in latest.topics %}
+                {% assign topic = site.data.topics | where: "id", topic_id | first %}
+                {% if topic %}
+                  <span class="topic-tag" style="background-color: {{ topic.color }};">{{ topic.name }}</span>
+                {% endif %}
+              {% endfor %}
+            </div>
+          {% endif %}
+          
+          <!-- Audio Player -->
+          <div class="episode-player">
+            {% include audio-player.html episode_id=latest.id spotify_url=latest.spotifyUrl %}
+          </div>
+          
+          <div class="episode-actions">
+            <a href="/episode.html?id={{ latest.id }}" class="btn btn-secondary">View Full Episode</a>
+          </div>
+        </div>
+      </article>
+    {% else %}
+      <div class="error-state">
+        <p class="error-message">No episodes available yet. Check back soon!</p>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<!-- Browse All Episodes CTA -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-content">
+      <h2>Explore All Episodes</h2>
+      <p>Browse our complete library of episodes and filter by topics that interest you.</p>
+      <a href="/episodes.html" class="btn btn-primary">View All Episodes</a>
+    </div>
+  </div>
+</section>

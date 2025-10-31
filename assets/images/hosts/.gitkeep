@@ -1,0 +1,16 @@
+# Host Photos Directory
+
+This directory contains host profile photos.
+
+## Image Specifications
+- Format: JPG or PNG
+- Dimensions: 800x800px (1:1 aspect ratio)
+- File size: < 200KB optimized
+- Naming: `firstname-lastname.jpg`
+
+## Current Hosts
+- alex-thompson.jpg
+- jordan-martinez.jpg
+
+## Placeholder
+Until actual photos are provided, the CSS will display a background color placeholder.

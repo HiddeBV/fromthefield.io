@@ -98,12 +98,12 @@
 
 ### Implementation for User Story 3
 
-- [ ] T033 [P] [US3] Create about page about.html with podcast mission section and host profiles
-- [ ] T034 [P] [US3] Create host profile component _includes/host-profile.html for consistent host display
-- [ ] T035 [US3] Implement about page JavaScript to load host data from _data/hosts.json
-- [ ] T036 [US3] Add about page styles in assets/css/main.css with mission section and host profile cards
-- [ ] T037 [US3] Add social media link styles in assets/css/main.css with icons and hover effects
-- [ ] T038 [US3] Implement responsive host profile layout for mobile and desktop viewing
+- [x] T033 [P] [US3] Create about page about.html with podcast mission section and host profiles
+- [x] T034 [P] [US3] Create host profile component _includes/host-profile.html for consistent host display
+- [x] T035 [US3] Implement about page JavaScript to load host data from _data/hosts.json
+- [x] T036 [US3] Add about page styles in assets/css/main.css with mission section and host profile cards
+- [x] T037 [US3] Add social media link styles in assets/css/main.css with icons and hover effects
+- [x] T038 [US3] Implement responsive host profile layout for mobile and desktop viewing
 
 **Checkpoint**: At this point, User Stories 1, 2, AND 3 should all work independently
 

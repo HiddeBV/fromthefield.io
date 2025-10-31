@@ -1,0 +1,136 @@
+---
+layout: default
+title: All Episodes
+description: Browse our complete library of podcast episodes covering cloud-native technologies, DevOps practices, consulting life, and technical leadership.
+---
+
+<div class="episodes-page">
+  <!-- Page Header -->
+  <header class="page-header">
+    <div class="container">
+      <h1 class="page-title">All Episodes</h1>
+      <p class="page-description">
+        Explore our complete collection of conversations with industry experts, 
+        covering cloud-native technologies, DevOps, consulting, and more.
+      </p>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="episodes-layout">
+      <!-- Filter Sidebar -->
+      <aside class="filter-sidebar" id="filterSidebar">
+        <div class="filter-section">
+          <div class="filter-header">
+            <h2 class="filter-title">Filter by Topic</h2>
+            <button class="btn-clear-filters" id="clearFilters" aria-label="Clear all filters">
+              Clear All
+            </button>
+          </div>
+          
+          <div class="filter-controls">
+            <!-- Search Box -->
+            <div class="search-box">
+              <label for="episodeSearch" class="sr-only">Search episodes</label>
+              <input 
+                type="search" 
+                id="episodeSearch" 
+                class="search-input" 
+                placeholder="Search episodes..."
+                aria-label="Search episodes by title or description"
+              >
+              <button class="btn-clear-search" id="clearSearch" aria-label="Clear search" style="display: none;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+            </div>
+
+            <!-- Topic Filters -->
+            <fieldset class="topic-filters">
+              <legend class="sr-only">Filter by topic</legend>
+              {% for topic in site.data.topics %}
+              <div class="filter-option">
+                <input 
+                  type="checkbox" 
+                  id="topic-{{ topic.id }}" 
+                  name="topic" 
+                  value="{{ topic.id }}"
+                  class="topic-checkbox"
+                  data-topic="{{ topic.id }}"
+                >
+                <label for="topic-{{ topic.id }}" class="filter-label">
+                  <span class="topic-indicator" style="background-color: {{ topic.color }};"></span>
+                  <span class="topic-name">{{ topic.name }}</span>
+                </label>
+              </div>
+              {% endfor %}
+            </fieldset>
+          </div>
+
+          <!-- Active Filter Count -->
+          <div class="filter-summary" id="filterSummary" style="display: none;">
+            <p class="filter-count" aria-live="polite">
+              <span id="activeFilterCount">0</span> filter(s) active
+            </p>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Episodes Grid -->
+      <main class="episodes-content">
+        <!-- Mobile Filter Toggle -->
+        <button class="btn-toggle-filters" id="toggleFilters" aria-expanded="false" aria-controls="filterSidebar">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="4" y1="21" x2="4" y2="14"></line>
+            <line x1="4" y1="10" x2="4" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12" y2="3"></line>
+            <line x1="20" y1="21" x2="20" y2="16"></line>
+            <line x1="20" y1="12" x2="20" y2="3"></line>
+            <line x1="1" y1="14" x2="7" y2="14"></line>
+            <line x1="9" y1="8" x2="15" y2="8"></line>
+            <line x1="17" y1="16" x2="23" y2="16"></line>
+          </svg>
+          <span>Filters</span>
+        </button>
+
+        <!-- Results Summary -->
+        <div class="results-summary">
+          <p class="results-count" id="resultsCount" aria-live="polite">
+            Showing <span id="visibleCount">{{ site.data.episodes.size }}</span> of <span id="totalCount">{{ site.data.episodes.size }}</span> episodes
+          </p>
+        </div>
+
+        <!-- Episodes Grid -->
+        <div class="episodes-grid" id="episodesGrid">
+          {% assign sorted_episodes = site.data.episodes | sort: 'date' | reverse %}
+          {% for episode in sorted_episodes %}
+            {% include episode-card.html episode=episode %}
+          {% endfor %}
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="emptyState" style="display: none;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="empty-icon">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <h3 class="empty-title">No episodes found</h3>
+          <p class="empty-description">Try adjusting your filters or search terms to find what you're looking for.</p>
+          <button class="btn-primary" id="resetFilters">Reset Filters</button>
+        </div>
+
+        <!-- Load More Button -->
+        <div class="load-more-container" id="loadMoreContainer" style="display: none;">
+          <button class="btn-secondary btn-load-more" id="loadMoreBtn">
+            Load More Episodes
+          </button>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
+
+<script src="{{ '/assets/js/episodes.js' | relative_url }}"></script>

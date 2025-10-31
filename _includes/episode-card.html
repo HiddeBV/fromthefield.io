@@ -1,0 +1,68 @@
+{% comment %}
+  Episode Card Component
+  
+  Usage: {% include episode-card.html episode=episode %}
+  
+  Required parameters:
+  - episode: Episode object with id, title, date, duration, thumbnailUrl, description, topics
+{% endcomment %}
+
+<article class="episode-card" data-episode-id="{{ include.episode.id }}" data-topics="{{ include.episode.topics | join: ',' }}">
+  <a href="/episode.html?id={{ include.episode.id }}" class="episode-card-link" aria-label="View {{ include.episode.title }}">
+    <!-- Episode Image -->
+    <div class="episode-image">
+      {% if include.episode.thumbnailUrl %}
+        <img 
+          src="{{ include.episode.thumbnailUrl | relative_url }}" 
+          alt="{{ include.episode.title }}" 
+          loading="lazy"
+          width="400"
+          height="300"
+        >
+      {% else %}
+        <div class="episode-placeholder">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 18V5l12-2v13"></path>
+            <circle cx="6" cy="18" r="3"></circle>
+            <circle cx="18" cy="16" r="3"></circle>
+          </svg>
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Episode Content -->
+    <div class="episode-card-content">
+      <!-- Episode Meta -->
+      <div class="episode-meta">
+        <time datetime="{{ include.episode.date }}" class="episode-date">
+          {{ include.episode.date | date: "%B %d, %Y" }}
+        </time>
+        <span class="meta-separator">•</span>
+        <span class="episode-duration">{{ include.episode.duration }}</span>
+      </div>
+
+      <!-- Episode Title -->
+      <h3 class="episode-card-title">{{ include.episode.title }}</h3>
+
+      <!-- Episode Description -->
+      <p class="episode-card-description">
+        {{ include.episode.description | truncatewords: 25 }}
+      </p>
+
+      <!-- Episode Topics -->
+      <div class="episode-topics">
+        {% for topic_id in include.episode.topics limit:3 %}
+          {% assign topic_data = site.data.topics | where: "id", topic_id | first %}
+          {% if topic_data %}
+            <span class="topic-tag" style="background-color: {{ topic_data.color }};">
+              {{ topic_data.name }}
+            </span>
+          {% endif %}
+        {% endfor %}
+        {% if include.episode.topics.size > 3 %}
+          <span class="topic-more">+{{ include.episode.topics.size | minus: 3 }} more</span>
+        {% endif %}
+      </div>
+    </div>
+  </a>
+</article>

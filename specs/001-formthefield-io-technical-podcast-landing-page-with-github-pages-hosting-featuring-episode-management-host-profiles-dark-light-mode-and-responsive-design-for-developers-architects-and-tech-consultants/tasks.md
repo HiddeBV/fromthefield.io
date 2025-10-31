@@ -75,16 +75,16 @@
 
 ### Implementation for User Story 2
 
-- [ ] T023 [P] [US2] Create episodes listing page episodes.html with grid layout and filter controls
-- [ ] T024 [P] [US2] Create episode card component _includes/episode-card.html for consistent episode display
-- [ ] T025 [P] [US2] Create episode detail page episode.html with full show notes and embedded player
-- [ ] T026 [US2] Implement topic filter component in episodes.html with checkboxes and clear functionality
-- [ ] T027 [US2] Create episodes management JavaScript in assets/js/episodes.js with filtering and search logic
-- [ ] T028 [US2] Add episode grid styles in assets/css/main.css with responsive cards and loading states
-- [ ] T029 [US2] Add topic filter styles in assets/css/main.css with accessible checkboxes and topic colors
-- [ ] T030 [US2] Implement episode search functionality in assets/js/episodes.js with title and description matching
-- [ ] T031 [US2] Add pagination/load more functionality in assets/js/episodes.js for large episode lists
-- [ ] T032 [US2] Implement episode detail page JavaScript for loading individual episode data by ID
+- [X] T023 [P] [US2] Create episodes listing page episodes.html with grid layout and filter controls
+- [X] T024 [P] [US2] Create episode card component _includes/episode-card.html for consistent episode display
+- [X] T025 [P] [US2] Create episode detail page episode.html with full show notes and embedded player
+- [X] T026 [US2] Implement topic filter component in episodes.html with checkboxes and clear functionality
+- [X] T027 [US2] Create episodes management JavaScript in assets/js/episodes.js with filtering and search logic
+- [X] T028 [US2] Add episode grid styles in assets/css/main.css with responsive cards and loading states
+- [X] T029 [US2] Add topic filter styles in assets/css/main.css with accessible checkboxes and topic colors
+- [X] T030 [US2] Implement episode search functionality in assets/js/episodes.js with title and description matching
+- [X] T031 [US2] Add pagination/load more functionality in assets/js/episodes.js for large episode lists
+- [X] T032 [US2] Implement episode detail page JavaScript for loading individual episode data by ID
 
 **Checkpoint**: At this point, User Stories 1 AND 2 should both work independently
 

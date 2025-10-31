@@ -1,0 +1,28 @@
+{
+  "name": "fromthefield-io",
+  "version": "1.0.0",
+  "description": "From The Field - Technical Podcast Website",
+  "scripts": {
+    "dev": "bundle exec jekyll serve --livereload",
+    "build": "bundle exec jekyll build",
+    "clean": "bundle exec jekyll clean",
+    "test": "echo \"No tests configured yet\" && exit 0",
+    "lint:css": "echo \"CSS linting not configured yet\" && exit 0",
+    "lint:js": "echo \"JS linting not configured yet\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/fromthefield.io.git"
+  },
+  "keywords": [
+    "podcast",
+    "technical",
+    "consulting",
+    "devops",
+    "cloud-native",
+    "kubernetes"
+  ],
+  "author": "From The Field Team",
+  "license": "MIT",
+  "devDependencies": {}
+}

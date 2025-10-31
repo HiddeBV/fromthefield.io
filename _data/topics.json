@@ -1,0 +1,74 @@
+[
+  {
+    "id": "cloud-native",
+    "name": "Cloud Native",
+    "color": "#3182CE",
+    "description": "Cloud-native architecture, microservices, containers, and modern infrastructure patterns"
+  },
+  {
+    "id": "kubernetes",
+    "name": "Kubernetes",
+    "color": "#326CE5",
+    "description": "Kubernetes orchestration, deployment strategies, and cluster management"
+  },
+  {
+    "id": "devops",
+    "name": "DevOps",
+    "color": "#38A169",
+    "description": "DevOps practices, CI/CD pipelines, automation, and delivery workflows"
+  },
+  {
+    "id": "platform-engineering",
+    "name": "Platform Engineering",
+    "color": "#805AD5",
+    "description": "Building internal developer platforms, golden paths, and developer experience"
+  },
+  {
+    "id": "architecture",
+    "name": "Architecture",
+    "color": "#DD6B20",
+    "description": "Software architecture, system design, and architectural decision-making"
+  },
+  {
+    "id": "leadership",
+    "name": "Leadership",
+    "color": "#D53F8C",
+    "description": "Technical leadership, team management, and organizational transformation"
+  },
+  {
+    "id": "career-development",
+    "name": "Career Development",
+    "color": "#00B5D8",
+    "description": "Career growth, skill development, and professional advancement in tech"
+  },
+  {
+    "id": "ai-ml",
+    "name": "AI & Machine Learning",
+    "color": "#9F7AEA",
+    "description": "Artificial intelligence, machine learning, and AI operations"
+  },
+  {
+    "id": "security",
+    "name": "Security",
+    "color": "#E53E3E",
+    "description": "Cloud security, zero trust, identity management, and security best practices"
+  },
+  {
+    "id": "consulting-life",
+    "name": "Consulting Life",
+    "color": "#319795",
+    "description": "The realities of consulting, client management, and life on the road"
+  },
+  {
+    "id": "automation",
+    "name": "Automation",
+    "color": "#2C7A7B",
+    "description": "Infrastructure automation, testing automation, and workflow optimization"
+  },
+  {
+    "id": "observability",
+    "name": "Observability",
+    "color": "#C05621",
+    "description": "Monitoring, logging, tracing, and system observability practices"
+  }
+]

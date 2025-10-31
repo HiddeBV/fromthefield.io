@@ -1,0 +1,91 @@
+# Site settings
+title: "From The Field"
+tagline: "Life as a Consultant in Tech"
+description: "A technical podcast featuring conversations from consultants, architects, and tech leaders working in enterprise technology. Topics include Cloud Native, Kubernetes, DevOps, Platform Engineering, and consulting life."
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://fromthefield.io" # the base hostname & protocol for your site
+
+# Build settings
+markdown: kramdown
+permalink: pretty
+timezone: America/New_York
+
+# Collections
+collections:
+  episodes:
+    output: true
+    permalink: /episodes/:name/
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - README.md
+  - LICENSE
+  - package.json
+  - package-lock.json
+  - specs/
+  - .specify/
+  - .vscode/
+  - .git/
+  - .github/
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# SEO
+social:
+  name: From The Field
+  links:
+    - https://twitter.com/fromthefieldio
+    - https://linkedin.com/company/fromthefield
+
+# Feed settings
+feed:
+  path: feed.xml
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+  - scope:
+      path: ""
+      type: "episodes"
+    values:
+      layout: "episode"
+
+# Site navigation
+navigation:
+  - title: Home
+    url: /
+  - title: Episodes
+    url: /episodes
+  - title: About
+    url: /about
+  - title: Contact
+    url: /contact
+
+# Podcast information
+podcast:
+  name: "From The Field"
+  description: "Life as a Consultant in Tech"
+  author: "From The Field Team"
+  email: "hello@fromthefield.io"
+  language: "en-us"
+  categories:
+    - Technology
+    - Business
+    - Careers
+  explicit: "no"
+  copyright: "© 2025 From The Field. All rights reserved."

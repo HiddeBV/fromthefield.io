@@ -1,0 +1,27 @@
+[
+  {
+    "id": "host001",
+    "name": "Alex Thompson",
+    "role": "Co-host & Cloud Architect",
+    "bio": "Alex is a cloud architect with over 12 years of experience helping enterprises modernize their infrastructure. Currently working as a Principal Consultant, Alex specializes in Kubernetes, cloud-native architecture, and platform engineering. When not designing distributed systems, you'll find Alex contributing to open-source projects or speaking at tech conferences.",
+    "photoUrl": "/assets/images/hosts/alex-thompson.jpg",
+    "socialLinks": {
+      "linkedin": "https://linkedin.com/in/alexthompson",
+      "twitter": "https://twitter.com/alexthompson",
+      "github": "https://github.com/alexthompson",
+      "website": "https://alexthompson.dev"
+    }
+  },
+  {
+    "id": "host002",
+    "name": "Jordan Martinez",
+    "role": "Co-host & DevOps Lead",
+    "bio": "Jordan brings 10+ years of DevOps and site reliability engineering experience to the show. As a Senior Engineering Manager, Jordan has led teams through complex cloud migrations and built resilient, scalable systems for Fortune 500 companies. Jordan is passionate about automation, observability, and creating great developer experiences. Outside of tech, Jordan is an avid rock climber and coffee enthusiast.",
+    "photoUrl": "/assets/images/hosts/jordan-martinez.jpg",
+    "socialLinks": {
+      "linkedin": "https://linkedin.com/in/jordanmartinez",
+      "twitter": "https://twitter.com/jordanmartinez",
+      "github": "https://github.com/jordanmartinez"
+    }
+  }
+]

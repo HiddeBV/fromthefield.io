@@ -4,11 +4,15 @@
   Usage: {% include episode-card.html episode=episode %}
   
   Required parameters:
-  - episode: Episode object with id, title, date, duration, thumbnailUrl, description, topics
+  - episode: Episode object with id, title, date, duration, description
+  
+  Optional parameters:
+  - episode.thumbnailUrl: Episode thumbnail image
+  - episode.topics: Array of topic IDs
 {% endcomment %}
 
-<article class="episode-card" data-episode-id="{{ include.episode.id }}" data-topics="{{ include.episode.topics | join: ',' }}">
-  <a href="/episode.html?id={{ include.episode.id }}" class="episode-card-link" aria-label="View {{ include.episode.title }}">
+<article class="episode-card" data-episode-id="{{ include.episode.id }}" {% if include.episode.topics %}data-topics="{{ include.episode.topics | join: ',' }}"{% endif %}>
+  <a href="{{ '/episode.html' | relative_url }}?id={{ include.episode.id }}" class="episode-card-link" aria-label="View {{ include.episode.title }}">
     <!-- Episode Image -->
     <div class="episode-image">
       {% if include.episode.thumbnailUrl %}
@@ -49,7 +53,8 @@
         {{ include.episode.description | truncatewords: 25 }}
       </p>
 
-      <!-- Episode Topics -->
+      <!-- Episode Topics (optional) -->
+      {% if include.episode.topics %}
       <div class="episode-topics">
         {% for topic_id in include.episode.topics limit:3 %}
           {% assign topic_data = site.data.topics | where: "id", topic_id | first %}
@@ -63,6 +68,7 @@
           <span class="topic-more">+{{ include.episode.topics.size | minus: 3 }} more</span>
         {% endif %}
       </div>
+      {% endif %}
     </div>
   </a>
 </article>

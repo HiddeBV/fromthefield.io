@@ -1,13 +1,31 @@
-<!-- Spotify Audio Player Component -->
+{% comment %}
+  Spotify Audio Player Component
+  
+  Usage: {% include audio-player.html episode_id=episode.id spotify_url=episode.spotifyUrl %}
+  
+  Required parameters:
+  - episode_id: Episode identifier
+  - spotify_url: Full Spotify episode URL (e.g., https://open.spotify.com/episode/ABC123)
+  
+  This component extracts the episode ID from the Spotify URL and creates an embed player.
+{% endcomment %}
+
 {% assign episode_id = include.episode_id %}
 {% assign spotify_url = include.spotify_url %}
 
+{% comment %}Extract Spotify episode ID from URL for embed{% endcomment %}
+{% assign spotify_embed_url = "" %}
+{% if spotify_url and spotify_url contains "https://open.spotify.com/episode/" %}
+  {% assign spotify_episode_id = spotify_url | remove: "https://open.spotify.com/episode/" | split: "?" | first %}
+  {% assign spotify_embed_url = "https://open.spotify.com/embed/episode/" | append: spotify_episode_id %}
+{% endif %}
+
 <div class="audio-player" data-episode-id="{{ episode_id }}">
-  {% if spotify_url and spotify_url != "" %}
+  {% if spotify_embed_url != "" %}
     <!-- Spotify Embed -->
     <div class="spotify-player">
       <iframe 
-        src="{{ spotify_url | replace: 'https://open.spotify.com/episode/', 'https://open.spotify.com/embed/episode/' }}"
+        src="{{ spotify_embed_url }}"
         width="100%" 
         height="152" 
         frameBorder="0" 

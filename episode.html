@@ -2,7 +2,17 @@
 layout: default
 title: Episode
 description: Listen to our podcast episode and explore detailed show notes.
+permalink: /episode.html
 ---
+
+{% comment %}
+  Episode Detail Page
+  
+  This page uses JavaScript to dynamically load episode content based on the ?id= query parameter.
+  For server-side rendering, use the episode layout instead: _layouts/episode.html
+  
+  Usage: /episode.html?id=ep001
+{% endcomment %}
 
 <div class="episode-detail-page">
   <!-- Loading State -->

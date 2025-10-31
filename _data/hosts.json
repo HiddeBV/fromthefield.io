@@ -1,15 +1,14 @@
 [
   {
     "id": "host001",
-    "name": "Alex Thompson",
-    "role": "Co-host & Cloud Architect",
-    "bio": "Alex is a cloud architect with over 12 years of experience helping enterprises modernize their infrastructure. Currently working as a Principal Consultant, Alex specializes in Kubernetes, cloud-native architecture, and platform engineering. When not designing distributed systems, you'll find Alex contributing to open-source projects or speaking at tech conferences.",
-    "photoUrl": "/assets/images/hosts/alex-thompson.jpg",
+    "name": "Hidde de Smet",
+    "role": "Host & Solutions Architect",
+    "bio": "Hidde de Smet is a solutions architect and cloud consultant passionate about platform engineering and cloud-native technologies. With extensive experience in helping organizations modernize their infrastructure, Hidde shares insights and stories from the field about real-world challenges and solutions in modern software development.",
+    "photoUrl": "/assets/images/hosts/hidde-de-smet.jpg",
     "socialLinks": {
-      "linkedin": "https://linkedin.com/in/alexthompson",
-      "twitter": "https://twitter.com/alexthompson",
-      "github": "https://github.com/alexthompson",
-      "website": "https://alexthompson.dev"
+      "linkedin": "https://linkedin.com/in/hiddedesmet",
+      "github": "https://github.com/hiddedesmet",
+      "website": "https://hiddedesmet.com"
     }
   },
   {

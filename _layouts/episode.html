@@ -1,0 +1,94 @@
+---
+layout: default
+---
+{% comment %}
+  Episode Layout
+  
+  This layout is used for individual episode detail pages.
+  It includes validation checks and renders episode content.
+  
+  Required front matter:
+  - layout: default
+  
+  Episode data is retrieved via query parameter: ?id=ep001
+{% endcomment %}
+
+{% include validate-episodes.html %}
+
+{% comment %}Extract episode ID from URL query parameter{% endcomment %}
+{% assign episode_id = page.url | split: "?id=" | last %}
+
+{% comment %}Find the episode in the data file{% endcomment %}
+{% assign current_episode = nil %}
+{% for episode in site.data.episodes %}
+  {% if episode.id == episode_id %}
+    {% assign current_episode = episode %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+{% if current_episode %}
+  {% comment %}Set page metadata{% endcomment %}
+  {% assign page_title = current_episode.title | append: " - " | append: site.title %}
+  {% assign page_description = current_episode.description %}
+  
+  <div class="episode-layout">
+    <div class="container">
+      <!-- Back Navigation -->
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="{{ '/episodes.html' | relative_url }}" class="breadcrumb-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          Back to All Episodes
+        </a>
+      </nav>
+
+      <!-- Episode Header -->
+      <header class="episode-header">
+        <!-- Episode Meta -->
+        <div class="episode-meta">
+          <time datetime="{{ current_episode.date }}" class="episode-date">
+            {{ current_episode.date | date: "%B %d, %Y" }}
+          </time>
+          <span class="meta-separator">•</span>
+          <span class="episode-duration">{{ current_episode.duration }}</span>
+        </div>
+
+        <!-- Episode Title -->
+        <h1 class="episode-title">{{ current_episode.title }}</h1>
+
+        <!-- Episode Description -->
+        <div class="episode-description">
+          <p>{{ current_episode.description }}</p>
+        </div>
+      </header>
+
+      <!-- Audio Player -->
+      <section class="episode-player-section">
+        <h2 class="sr-only">Listen to Episode</h2>
+        {% include audio-player.html episode_id=current_episode.id spotify_url=current_episode.spotifyUrl %}
+      </section>
+
+      <!-- Episode Content -->
+      <div class="episode-content">
+        {{ content }}
+      </div>
+    </div>
+  </div>
+{% else %}
+  {% comment %}Episode not found{% endcomment %}
+  <div class="error-state">
+    <div class="container">
+      <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="error-icon">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="8" x2="12" y2="12"></line>
+        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+      </svg>
+      <h2>Episode Not Found</h2>
+      <p class="error-message">We couldn't find the episode you're looking for. The episode ID "{{ episode_id }}" does not exist.</p>
+      <a href="{{ '/episodes.html' | relative_url }}" class="btn-primary">Browse All Episodes</a>
+    </div>
+  </div>
+{% endif %}

@@ -576,28 +576,28 @@ img.error {
 .site-footer {
   background: var(--color-bg-secondary);
   border-top: 1px solid var(--color-border);
-  padding: var(--spacing-3xl) 0 var(--spacing-md);
-  margin-top: var(--spacing-3xl);
+  padding: var(--spacing-12) 0 var(--spacing-6);
+  margin-top: var(--spacing-16);
 }
 
 .footer-content {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: var(--spacing-lg);
-  margin-bottom: var(--spacing-xl);
+  gap: var(--spacing-8);
+  margin-bottom: var(--spacing-8);
 }
 
 .footer-section {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-sm);
+  gap: var(--spacing-3);
 }
 
 .footer-title,
 .footer-heading {
   font-size: var(--font-size-lg);
   font-weight: 700;
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: var(--spacing-3);
   color: var(--color-text-primary);
 }
 
@@ -612,7 +612,7 @@ img.error {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xs);
+  gap: var(--spacing-2);
 }
 
 .footer-nav a {
@@ -1152,7 +1152,7 @@ img.error {
 /* CTA Section */
 .cta-section {
   background: var(--color-bg-secondary);
-  padding: var(--spacing-3xl) 0;
+  padding: var(--spacing-16) 0;
   text-align: center;
 }
 
@@ -1163,13 +1163,13 @@ img.error {
 
 .cta-content h2 {
   font-size: var(--font-size-h2);
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-4);
 }
 
 .cta-content p {
   font-size: var(--font-size-lg);
   color: var(--color-text-secondary);
-  margin-bottom: var(--spacing-xl);
+  margin-bottom: var(--spacing-8);
 }
 
 /* =================================================================
@@ -3193,5 +3193,190 @@ select:focus-visible,
   
   .search-button {
     width: 100%;
+  }
+}
+
+/* ==========================================================================
+   Episode Layout Styles (MVP - User Story 1)
+   ========================================================================== */
+
+/* Episode Layout Container */
+.episode-layout {
+  padding: var(--spacing-8) 0 var(--spacing-16) 0;
+  background: var(--color-bg-primary);
+}
+
+/* Episode Layout Breadcrumb Navigation */
+.episode-layout .breadcrumb {
+  margin-bottom: var(--spacing-8);
+}
+
+.episode-layout .breadcrumb-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  transition: color var(--transition-fast) var(--ease-out);
+}
+
+.episode-layout .breadcrumb-link:hover {
+  color: var(--color-accent);
+}
+
+.episode-layout .breadcrumb-link svg {
+  flex-shrink: 0;
+}
+
+/* Episode Layout Header */
+.episode-layout .episode-header {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-8);
+  margin-bottom: var(--spacing-8);
+  box-shadow: var(--shadow-sm);
+}
+
+.episode-layout .episode-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-4);
+}
+
+.episode-layout .meta-separator {
+  color: var(--color-border);
+  font-weight: var(--font-weight-bold);
+}
+
+.episode-layout .episode-date {
+  font-weight: var(--font-weight-medium);
+}
+
+.episode-layout .episode-duration {
+  font-weight: var(--font-weight-medium);
+}
+
+.episode-layout .episode-title {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-extrabold);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-6);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.episode-layout .episode-description {
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text-secondary);
+}
+
+.episode-layout .episode-description p {
+  margin: 0;
+}
+
+/* Episode Player Section */
+.episode-layout .episode-player-section {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-6);
+  margin-bottom: var(--spacing-8);
+  box-shadow: var(--shadow-sm);
+}
+
+.episode-layout .episode-player-section h2 {
+  margin: 0;
+}
+
+.episode-layout .audio-player {
+  margin: 0;
+}
+
+.episode-layout .spotify-player iframe {
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-xs);
+}
+
+/* Episode Content */
+.episode-layout .episode-content {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-8);
+  box-shadow: var(--shadow-sm);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text-secondary);
+}
+
+.episode-layout .episode-content > *:last-child {
+  margin-bottom: 0;
+}
+
+/* Episode Layout Error State */
+.episode-layout .error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-24) var(--spacing-8);
+  text-align: center;
+}
+
+.episode-layout .error-state .error-icon {
+  width: 64px;
+  height: 64px;
+  color: var(--color-error);
+  margin-bottom: var(--spacing-6);
+}
+
+.episode-layout .error-state h2 {
+  font-size: var(--font-size-h2);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-4);
+}
+
+.episode-layout .error-state .error-message {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-8);
+  max-width: 500px;
+}
+
+.episode-layout .error-state .btn-primary {
+  min-width: 200px;
+}
+
+/* Episode Layout Mobile Responsive */
+@media (max-width: 768px) {
+  .episode-layout {
+    padding: var(--spacing-6) 0 var(--spacing-12) 0;
+  }
+
+  .episode-layout .episode-header {
+    padding: var(--spacing-6);
+  }
+
+  .episode-layout .episode-title {
+    font-size: var(--font-size-h2);
+  }
+
+  .episode-layout .episode-description {
+    font-size: var(--font-size-base);
+  }
+
+  .episode-layout .episode-player-section {
+    padding: var(--spacing-4);
+  }
+
+  .episode-layout .episode-content {
+    padding: var(--spacing-6);
   }
 }

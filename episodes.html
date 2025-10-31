@@ -105,6 +105,7 @@ description: Browse our complete library of podcast episodes covering cloud-nati
 
         <!-- Episodes Grid -->
         <div class="episodes-grid" id="episodesGrid">
+          {% comment %}Sort episodes by date, newest first{% endcomment %}
           {% assign sorted_episodes = site.data.episodes | sort: 'date' | reverse %}
           {% for episode in sorted_episodes %}
             {% include episode-card.html episode=episode %}

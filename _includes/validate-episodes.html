@@ -1,0 +1,157 @@
+{% comment %}
+  Episode Validation Include
+  Purpose: Validate episode data structure and provide clear error messages
+  Usage: {% include validate-episodes.html %}
+  Location: Include at top of episode layouts
+{% endcomment %}
+
+{% assign validation_errors = "" | split: "" %}
+{% assign validation_warnings = "" | split: "" %}
+{% assign episode_ids = "" | split: "" %}
+
+{% for episode in site.data.episodes %}
+  
+  {% comment %} T003: Required Fields Validation {% endcomment %}
+  {% unless episode.id and episode.id != "" %}
+    {% assign error_msg = "ERROR: Episode missing required field: id" %}
+    {% assign validation_errors = validation_errors | push: error_msg %}
+  {% endunless %}
+  
+  {% unless episode.title and episode.title != "" %}
+    {% assign error_msg = "ERROR: Episode " | append: episode.id | append: " missing required field: title" %}
+    {% assign validation_errors = validation_errors | push: error_msg %}
+  {% endunless %}
+  
+  {% unless episode.description and episode.description != "" %}
+    {% assign error_msg = "ERROR: Episode " | append: episode.id | append: " missing required field: description" %}
+    {% assign validation_errors = validation_errors | push: error_msg %}
+  {% endunless %}
+  
+  {% unless episode.date and episode.date != "" %}
+    {% assign error_msg = "ERROR: Episode " | append: episode.id | append: " missing required field: date" %}
+    {% assign validation_errors = validation_errors | push: error_msg %}
+  {% endunless %}
+  
+  {% unless episode.duration and episode.duration != "" %}
+    {% assign error_msg = "ERROR: Episode " | append: episode.id | append: " missing required field: duration" %}
+    {% assign validation_errors = validation_errors | push: error_msg %}
+  {% endunless %}
+  
+  {% unless episode.spotifyUrl and episode.spotifyUrl != "" %}
+    {% assign error_msg = "ERROR: Episode " | append: episode.id | append: " missing required field: spotifyUrl" %}
+    {% assign validation_errors = validation_errors | push: error_msg %}
+  {% endunless %}
+  
+  {% comment %} T004: Date Format Validation (YYYY-MM-DD) {% endcomment %}
+  {% if episode.date %}
+    {% assign date_parts = episode.date | split: "-" %}
+    {% assign date_valid = false %}
+    
+    {% if date_parts.size == 3 %}
+      {% assign year = date_parts[0] %}
+      {% assign month = date_parts[1] %}
+      {% assign day = date_parts[2] %}
+      
+      {% if year.size == 4 and month.size == 2 and day.size == 2 %}
+        {% assign year_num = year | plus: 0 %}
+        {% assign month_num = month | plus: 0 %}
+        {% assign day_num = day | plus: 0 %}
+        
+        {% if year_num >= 2000 and year_num <= 2100 and month_num >= 1 and month_num <= 12 and day_num >= 1 and day_num <= 31 %}
+          {% assign date_valid = true %}
+        {% endif %}
+      {% endif %}
+    {% endif %}
+    
+    {% unless date_valid %}
+      {% assign error_msg = "ERROR: Episode " | append: episode.id | append: " has invalid date format: " | append: episode.date | append: " (expected YYYY-MM-DD)" %}
+      {% assign validation_errors = validation_errors | push: error_msg %}
+    {% endunless %}
+  {% endif %}
+  
+  {% comment %} T005: Duration Format Validation (MM:SS or HH:MM:SS) {% endcomment %}
+  {% if episode.duration %}
+    {% assign duration_parts = episode.duration | split: ":" %}
+    {% assign duration_valid = false %}
+    
+    {% if duration_parts.size == 2 %}
+      {% assign minutes = duration_parts[0] %}
+      {% assign seconds = duration_parts[1] %}
+      
+      {% if minutes.size >= 1 and seconds.size == 2 %}
+        {% assign minutes_num = minutes | plus: 0 %}
+        {% assign seconds_num = seconds | plus: 0 %}
+        
+        {% if seconds_num >= 0 and seconds_num <= 59 %}
+          {% assign duration_valid = true %}
+        {% endif %}
+      {% endif %}
+    {% elsif duration_parts.size == 3 %}
+      {% assign hours = duration_parts[0] %}
+      {% assign minutes = duration_parts[1] %}
+      {% assign seconds = duration_parts[2] %}
+      
+      {% if hours.size >= 1 and minutes.size == 2 and seconds.size == 2 %}
+        {% assign minutes_num = minutes | plus: 0 %}
+        {% assign seconds_num = seconds | plus: 0 %}
+        
+        {% if minutes_num >= 0 and minutes_num <= 59 and seconds_num >= 0 and seconds_num <= 59 %}
+          {% assign duration_valid = true %}
+        {% endif %}
+      {% endif %}
+    {% endif %}
+    
+    {% unless duration_valid %}
+      {% assign error_msg = "ERROR: Episode " | append: episode.id | append: " has invalid duration format: " | append: episode.duration | append: " (expected MM:SS or HH:MM:SS)" %}
+      {% assign validation_errors = validation_errors | push: error_msg %}
+    {% endunless %}
+  {% endif %}
+  
+  {% comment %} T006: Unique Episode ID Check {% endcomment %}
+  {% if episode.id %}
+    {% if episode_ids contains episode.id %}
+      {% assign error_msg = "ERROR: Duplicate episode ID found: " | append: episode.id %}
+      {% assign validation_errors = validation_errors | push: error_msg %}
+    {% else %}
+      {% assign episode_ids = episode_ids | push: episode.id %}
+    {% endif %}
+  {% endif %}
+  
+  {% comment %} T007: Spotify URL Format Validation {% endcomment %}
+  {% if episode.spotifyUrl %}
+    {% unless episode.spotifyUrl contains "https://open.spotify.com/episode/" %}
+      {% assign error_msg = "ERROR: Episode " | append: episode.id | append: " has invalid Spotify URL format: " | append: episode.spotifyUrl | append: " (must start with https://open.spotify.com/episode/)" %}
+      {% assign validation_errors = validation_errors | push: error_msg %}
+    {% endunless %}
+  {% endif %}
+  
+{% endfor %}
+
+{% comment %} Output Validation Results {% endcomment %}
+{% if validation_errors.size > 0 %}
+  <div style="background: #ffebee; border: 2px solid #c62828; padding: 20px; margin: 20px; font-family: monospace;">
+    <h2 style="color: #c62828; margin-top: 0;">❌ Episode Validation Errors</h2>
+    <p><strong>{{ validation_errors.size }} error(s) found. Site build should fail.</strong></p>
+    <ul style="color: #b71c1c;">
+      {% for error in validation_errors %}
+        <li>{{ error }}</li>
+      {% endfor %}
+    </ul>
+    <p style="margin-bottom: 0;"><em>Fix these errors in _data/episodes.json before deploying.</em></p>
+  </div>
+  
+  {% comment %} Force build failure by generating invalid Liquid {% endcomment %}
+  {{ validation_errors | join: " | " | prepend: "VALIDATION FAILED: " }}
+{% endif %}
+
+{% if validation_warnings.size > 0 %}
+  <div style="background: #fff3e0; border: 2px solid #f57c00; padding: 20px; margin: 20px; font-family: monospace;">
+    <h2 style="color: #e65100; margin-top: 0;">⚠️ Episode Validation Warnings</h2>
+    <p><strong>{{ validation_warnings.size }} warning(s) found. Site will build but review recommended.</strong></p>
+    <ul style="color: #e65100;">
+      {% for warning in validation_warnings %}
+        <li>{{ warning }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}

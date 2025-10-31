@@ -9,9 +9,24 @@
   <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
   <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
   <meta name="author" content="{{ site.podcast.author }}">
+  <meta name="keywords" content="{% if page.keywords %}{{ page.keywords }}{% else %}podcast, technology, software engineering, cloud computing, devops, architecture{% endif %}">
   
   <!-- Canonical URL -->
   <link rel="canonical" href="{{ page.url | absolute_url }}">
+  
+  <!-- Robots Meta -->
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  
+  <!-- Language and Geo -->
+  <meta name="language" content="English">
+  <meta name="geo.region" content="US">
+  
+  <!-- Web App Manifest -->
+  <link rel="manifest" href="/manifest.json">
+  
+  <!-- Theme Color for Mobile Browsers -->
+  <meta name="theme-color" content="#3182CE" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#63B3ED" media="(prefers-color-scheme: dark)">
   
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
@@ -27,15 +42,36 @@
   <meta name="twitter:title" content="{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}">
   <meta name="twitter:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
   <meta name="twitter:image" content="{% if page.image %}{{ page.image | absolute_url }}{% else %}{{ '/assets/images/og-image.jpg' | absolute_url }}{% endif %}">
+  <meta name="twitter:creator" content="@{{ site.social.twitter }}">
+  <meta name="twitter:site" content="@{{ site.social.twitter }}">
+  
+  <!-- Additional Open Graph Tags -->
+  <meta property="og:locale" content="en_US">
+  <meta property="article:published_time" content="{% if page.date %}{{ page.date | date_to_xmlschema }}{% endif %}">
+  <meta property="article:modified_time" content="{% if page.last_modified_at %}{{ page.last_modified_at | date_to_xmlschema }}{% endif %}">
   
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   
-  <!-- Preload critical assets -->
-  <link rel="preload" href="/assets/css/main.css" as="style">
+  <!-- Critical CSS (inline for faster initial render) -->
+  {% include critical-css.html %}
   
-  <!-- Stylesheets -->
-  <link rel="stylesheet" href="/assets/css/main.css">
+  <!-- Preload main stylesheet -->
+  <link rel="preload" href="/assets/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="/assets/css/main.css"></noscript>
+  
+  <!-- Async CSS loading fallback -->
+  <script>
+    // Ensure stylesheet loads even if preload fails
+    (function() {
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = '/assets/css/main.css';
+      if (!document.querySelector('link[href="/assets/css/main.css"]')) {
+        document.head.appendChild(link);
+      }
+    })();
+  </script>
   
   <!-- Theme Script (inline to prevent flash) -->
   <script>
@@ -54,7 +90,7 @@
   <!-- RSS Feed -->
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | absolute_url }}">
   
-  <!-- Structured Data - Site -->
+  <!-- Structured Data - WebSite with Search -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -62,23 +98,43 @@
     "name": "{{ site.title }}",
     "description": "{{ site.description }}",
     "url": "{{ site.url }}",
+    "inLanguage": "en-US",
     "potentialAction": {
       "@type": "SearchAction",
-      "target": "{{ site.url }}/episodes?search={search_term_string}",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "{{ site.url }}/episodes.html?search={search_term_string}"
+      },
       "query-input": "required name=search_term_string"
     }
   }
   </script>
   
-  <!-- Structured Data - Organization -->
+  <!-- Structured Data - Podcast Series -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Organization",
+    "@type": "PodcastSeries",
     "name": "{{ site.title }}",
+    "description": "{{ site.description }}",
     "url": "{{ site.url }}",
-    "logo": "{{ '/assets/images/logo.png' | absolute_url }}",
-    "sameAs": {{ site.social.links | jsonify }}
+    "image": "{{ '/assets/images/podcast-cover.jpg' | absolute_url }}",
+    "author": {
+      "@type": "Organization",
+      "name": "{{ site.title }}",
+      "url": "{{ site.url }}",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{{ '/assets/images/logo.png' | absolute_url }}"
+      },
+      "sameAs": [
+        "{{ site.social.spotify }}",
+        "{{ site.social.twitter }}",
+        "{{ site.social.linkedin }}",
+        "{{ site.social.github }}"
+      ]
+    },
+    "webFeed": "{{ '/feed.xml' | absolute_url }}"
   }
   </script>
   
@@ -92,11 +148,35 @@
     "name": "{{ page.title }}",
     "description": "{{ page.description }}",
     "datePublished": "{{ page.date | date_to_xmlschema }}",
+    "image": "{{ page.image | default: '/assets/images/podcast-cover.jpg' | absolute_url }}",
     "partOfSeries": {
       "@type": "PodcastSeries",
       "name": "{{ site.title }}",
       "url": "{{ site.url }}"
-    }
+    },
+    {% if page.duration %}
+    "timeRequired": "{{ page.duration }}",
+    {% endif %}
+    {% if page.keywords %}
+    "keywords": "{{ page.keywords }}",
+    {% endif %}
+    "inLanguage": "en-US"
+  }
+  </script>
+  {% endif %}
+  
+  {% if page.layout == 'default' and page.url == '/' %}
+  <!-- Structured Data - Breadcrumb List for Homepage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "{{ site.url }}"
+    }]
   }
   </script>
   {% endif %}
@@ -118,5 +198,27 @@
   
   <!-- JavaScript -->
   <script src="/assets/js/main.js"></script>
+  
+  <!-- Analytics -->
+  {% if site.analytics %}
+    {% if site.analytics.google %}
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.analytics.google }}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '{{ site.analytics.google }}', {
+        'anonymize_ip': true,
+        'cookie_flags': 'SameSite=None;Secure'
+      });
+    </script>
+    {% endif %}
+    
+    {% if site.analytics.plausible %}
+    <!-- Plausible Analytics -->
+    <script defer data-domain="{{ site.analytics.plausible_domain | default: site.url | replace: 'https://', '' | replace: 'http://', '' }}" src="https://plausible.io/js/script.js"></script>
+    {% endif %}
+  {% endif %}
 </body>
 </html>

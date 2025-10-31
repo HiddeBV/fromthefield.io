@@ -1,0 +1,142 @@
+<style>
+/* Critical CSS - Above-the-fold styles for faster initial render */
+
+/* CSS Reset */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+/* CSS Variables - Light Mode */
+:root{
+  --color-bg-primary:#FFFFFF;
+  --color-bg-secondary:#F7F9FC;
+  --color-text-primary:#1A202C;
+  --color-text-secondary:#4A5568;
+  --color-accent:#3182CE;
+  --color-accent-hover:#2C5282;
+  --color-border:#E2E8F0;
+  --color-card-bg:#FFFFFF;
+  --font-size-base:18px;
+  --font-size-h1:48px;
+  --font-size-h2:36px;
+  --spacing-sm:16px;
+  --spacing-md:24px;
+  --spacing-lg:32px;
+  --spacing-xl:48px;
+  --container-max-width:1200px;
+  --border-radius:8px;
+  --transition-speed:0.2s;
+  --z-header:100;
+}
+
+/* Dark Mode */
+[data-theme="dark"]{
+  --color-bg-primary:#1A202C;
+  --color-bg-secondary:#2D3748;
+  --color-text-primary:#F7FAFC;
+  --color-text-secondary:#E2E8F0;
+  --color-accent:#63B3ED;
+  --color-accent-hover:#4299E1;
+  --color-border:#4A5568;
+  --color-card-bg:#2D3748;
+}
+
+/* Base Typography */
+html{font-size:16px;scroll-behavior:smooth}
+body{
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+  font-size:var(--font-size-base);
+  line-height:1.7;
+  color:var(--color-text-primary);
+  background-color:var(--color-bg-primary);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* Skip Link */
+.skip-link{
+  position:absolute;
+  top:-40px;
+  left:0;
+  background:var(--color-accent);
+  color:white;
+  padding:8px 16px;
+  text-decoration:none;
+  z-index:1000;
+}
+.skip-link:focus{top:0}
+
+/* Header */
+.site-header{
+  background-color:var(--color-bg-primary);
+  border-bottom:1px solid var(--color-border);
+  padding:var(--spacing-md) 0;
+  position:sticky;
+  top:0;
+  z-index:var(--z-header);
+}
+.site-header .container{
+  max-width:var(--container-max-width);
+  margin:0 auto;
+  padding:0 var(--spacing-md);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.site-logo{
+  font-size:24px;
+  font-weight:700;
+  color:var(--color-text-primary);
+  text-decoration:none;
+}
+.site-nav ul{
+  list-style:none;
+  display:flex;
+  gap:var(--spacing-md);
+}
+.site-nav a{
+  color:var(--color-text-secondary);
+  text-decoration:none;
+  transition:color var(--transition-speed);
+}
+.site-nav a:hover{color:var(--color-accent)}
+
+/* Container */
+.container{
+  max-width:var(--container-max-width);
+  margin:0 auto;
+  padding:0 var(--spacing-md);
+}
+
+/* Hero Section */
+.hero{
+  padding:var(--spacing-xl) 0;
+  text-align:center;
+}
+.hero h1{
+  font-size:var(--font-size-h1);
+  font-weight:700;
+  margin-bottom:var(--spacing-md);
+  line-height:1.2;
+}
+
+/* Buttons */
+.btn{
+  display:inline-block;
+  padding:12px 24px;
+  background-color:var(--color-accent);
+  color:white;
+  text-decoration:none;
+  border-radius:var(--border-radius);
+  font-weight:600;
+  transition:background-color var(--transition-speed);
+  border:none;
+  cursor:pointer;
+}
+.btn:hover{background-color:var(--color-accent-hover)}
+
+/* Mobile Adjustments */
+@media(max-width:768px){
+  :root{--font-size-h1:32px;--font-size-h2:24px}
+  .site-nav ul{gap:var(--spacing-sm)}
+  .hero{padding:var(--spacing-md) 0}
+}
+</style>

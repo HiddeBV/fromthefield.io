@@ -10,6 +10,12 @@ markdown: kramdown
 permalink: pretty
 timezone: America/New_York
 
+# Sass/SCSS settings
+sass:
+  style: compressed # Minify CSS output
+  sass_dir: _sass
+  sourcemap: never # Disable sourcemaps in production
+
 # Collections
 collections:
   episodes:

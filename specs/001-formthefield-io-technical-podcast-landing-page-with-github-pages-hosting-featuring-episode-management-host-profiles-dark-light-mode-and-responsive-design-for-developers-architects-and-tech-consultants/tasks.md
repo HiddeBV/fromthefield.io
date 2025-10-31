@@ -117,12 +117,12 @@
 
 ### Implementation for User Story 4
 
-- [ ] T039 [P] [US4] Create contact page contact.html with contact form and guest inquiry section
-- [ ] T040 [P] [US4] Create contact form component _includes/contact-form.html with proper form fields and labels
-- [ ] T041 [US4] Implement contact form JavaScript in assets/js/contact.js with validation and Formspree integration
-- [ ] T042 [US4] Add contact form styles in assets/css/main.css with accessible form design and error states
-- [ ] T043 [US4] Add form validation JavaScript with real-time feedback and accessibility support
-- [ ] T044 [US4] Configure Formspree integration with proper error handling and success confirmation
+- [x] T039 [P] [US4] Create contact page contact.html with contact form and guest inquiry section
+- [x] T040 [P] [US4] Create contact form component _includes/contact-form.html with proper form fields and labels
+- [x] T041 [US4] Implement contact form JavaScript in assets/js/contact.js with validation and Formspree integration
+- [x] T042 [US4] Add contact form styles in assets/css/main.css with accessible form design and error states
+- [x] T043 [US4] Add form validation JavaScript with real-time feedback and accessibility support
+- [x] T044 [US4] Configure Formspree integration with proper error handling and success confirmation
 
 **Checkpoint**: At this point, all core user stories should be independently functional
 

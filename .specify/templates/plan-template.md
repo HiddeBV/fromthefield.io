@@ -31,7 +31,18 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+The following MUST all be satisfied (derived from Constitution v1.0.0):
+
+1. Accessibility: Planned pages include semantic landmarks (header/nav/main/footer) & heading hierarchy.
+2. Metadata: Each page defines unique `<title>` + meta description (50–160 chars) + canonical URL strategy.
+3. Performance Budget: Estimated critical CSS <50KB & no client-side framework hydration proposed.
+4. SEO Assets: `sitemap.xml`, `robots.txt`, `_config.yml (url, baseurl)` presence/plan confirmed.
+5. Structured Data: JSON-LD Site + Organization planned for `index.html`.
+6. Review Discipline: PR workflow includes reviewer for SEO-critical files.
+7. Simplicity: No unnecessary JS/CSS libraries beyond documented minimal set.
+8. Orphan Avoidance: Each new page has at least one inbound link identified.
+
+Any violation MUST be justified in the Complexity Tracking table below before proceeding.
 
 ## Project Structure
 

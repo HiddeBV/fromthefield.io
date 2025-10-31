@@ -31,9 +31,14 @@
   }
   
   /**
-   * Apply theme to document
+   * Apply theme to document with smooth transition
    */
-  function setTheme(theme) {
+  function setTheme(theme, skipTransition = false) {
+    // Add transitioning class for smooth animations
+    if (!skipTransition) {
+      document.documentElement.classList.add('theme-transitioning');
+    }
+    
     document.documentElement.setAttribute(THEME_ATTR, theme);
     localStorage.setItem(THEME_KEY, theme);
     
@@ -42,6 +47,19 @@
     if (themeToggle) {
       const newLabel = theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode';
       themeToggle.setAttribute('aria-label', newLabel);
+      
+      // Update icon if it exists
+      const icon = themeToggle.querySelector('.theme-icon');
+      if (icon) {
+        icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+      }
+    }
+    
+    // Remove transitioning class after animation completes
+    if (!skipTransition) {
+      setTimeout(() => {
+        document.documentElement.classList.remove('theme-transitioning');
+      }, 300);
     }
   }
   
@@ -51,7 +69,28 @@
   function toggleTheme() {
     const currentTheme = document.documentElement.getAttribute(THEME_ATTR) || 'light';
     const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    
+    // Announce theme change to screen readers
+    announceThemeChange(newTheme);
+    
     setTheme(newTheme);
+  }
+  
+  /**
+   * Announce theme change to screen readers
+   */
+  function announceThemeChange(theme) {
+    const announcement = document.createElement('div');
+    announcement.setAttribute('role', 'status');
+    announcement.setAttribute('aria-live', 'polite');
+    announcement.className = 'visually-hidden';
+    announcement.textContent = `Switched to ${theme} mode`;
+    document.body.appendChild(announcement);
+    
+    // Remove after announcement
+    setTimeout(() => {
+      document.body.removeChild(announcement);
+    }, 1000);
   }
   
   /**
@@ -66,16 +105,26 @@
       const label = currentTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode';
       themeToggle.setAttribute('aria-label', label);
       
+      // Update icon if it exists
+      const icon = themeToggle.querySelector('.theme-icon');
+      if (icon) {
+        icon.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+      }
+      
       // Add click event listener
       themeToggle.addEventListener('click', toggleTheme);
     }
     
     // Listen for system theme changes
     if (window.matchMedia) {
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      
+      // Add listener for system theme changes
+      mediaQuery.addEventListener('change', (e) => {
         // Only apply if user hasn't explicitly set a preference
         if (!localStorage.getItem(THEME_KEY)) {
-          setTheme(e.matches ? 'dark' : 'light');
+          setTheme(e.matches ? 'dark' : 'light', true);
+          announceThemeChange(e.matches ? 'dark' : 'light');
         }
       });
     }

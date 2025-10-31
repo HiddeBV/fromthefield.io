@@ -1,0 +1,115 @@
+---
+layout: default
+title: About
+permalink: /about.html
+description: Learn about From The Field podcast, our mission, and meet the hosts who bring you real conversations about cloud architecture, DevOps, and the consulting life.
+scripts:
+  - /assets/js/about.js
+---
+
+<section class="about-hero">
+  <div class="container">
+    <h1>About From The Field</h1>
+    <p class="about-tagline">{{ site.data.site-config.podcast.tagline }}</p>
+  </div>
+</section>
+
+<section class="about-mission">
+  <div class="container">
+    <div class="mission-content">
+      <h2>Our Mission</h2>
+      <div class="mission-text">
+        <p>
+          <strong>From The Field</strong> is a technical podcast created by consultants, for consultants. 
+          We bring you authentic conversations about the real challenges and solutions in modern technology consulting.
+        </p>
+        <p>
+          Whether you're a developer, architect, DevOps engineer, or tech leader, our episodes dive deep into 
+          the topics that matter: cloud architecture, platform engineering, Kubernetes, site reliability, 
+          and the unique dynamics of consulting work.
+        </p>
+        <p>
+          We believe in sharing practical knowledge from the field—not just theory, but real-world experiences, 
+          lessons learned, and honest discussions about what works (and what doesn't) in enterprise technology.
+        </p>
+      </div>
+      
+      <div class="mission-features">
+        <div class="feature-card">
+          <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 20h9"></path>
+            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+          </svg>
+          <h3>Technical Depth</h3>
+          <p>We don't shy away from complex topics. Each episode goes deep into technical challenges and architectural decisions.</p>
+        </div>
+        
+        <div class="feature-card">
+          <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+          <h3>Real Experiences</h3>
+          <p>Stories and insights from actual consulting engagements, with lessons learned from successes and failures.</p>
+        </div>
+        
+        <div class="feature-card">
+          <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+          </svg>
+          <h3>Honest Conversations</h3>
+          <p>No marketing fluff. We discuss real challenges, trade-offs, and the realities of working in tech consulting.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about-hosts">
+  <div class="container">
+    <h2>Meet Your Hosts</h2>
+    <p class="section-subtitle">
+      Your guides through the world of cloud architecture, DevOps, and technical consulting.
+    </p>
+    
+    <div class="hosts-grid">
+      {% for host in site.data.hosts %}
+        {% include host-profile.html host=host %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="about-topics">
+  <div class="container">
+    <h2>What We Cover</h2>
+    <p class="section-subtitle">
+      Explore the topics we dive into across our episodes.
+    </p>
+    
+    <div class="topics-grid">
+      {% for topic in site.data.topics %}
+        <a href="/episodes.html?topic={{ topic.id }}" class="topic-card" style="--topic-color: {{ topic.color }};">
+          <span class="topic-name">{{ topic.name }}</span>
+          <span class="topic-description">{{ topic.description }}</span>
+          <span class="topic-link-icon" aria-hidden="true">→</span>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="about-cta">
+  <div class="container">
+    <div class="cta-content">
+      <h2>Join the Conversation</h2>
+      <p>
+        Subscribe to From The Field and never miss an episode. Get insights from the field 
+        delivered straight to your favorite podcast player.
+      </p>
+      {% include subscribe-buttons.html %}
+    </div>
+  </div>
+</section>

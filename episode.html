@@ -1,0 +1,136 @@
+---
+layout: default
+title: Episode
+description: Listen to our podcast episode and explore detailed show notes.
+---
+
+<div class="episode-detail-page">
+  <!-- Loading State -->
+  <div class="loading-state" id="loadingState">
+    <div class="spinner"></div>
+    <p>Loading episode...</p>
+  </div>
+
+  <!-- Error State -->
+  <div class="error-state" id="errorState" style="display: none;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="error-icon">
+      <circle cx="12" cy="12" r="10"></circle>
+      <line x1="12" y1="8" x2="12" y2="12"></line>
+      <line x1="12" y1="16" x2="12.01" y2="16"></line>
+    </svg>
+    <h2>Episode Not Found</h2>
+    <p class="error-message">We couldn't find the episode you're looking for.</p>
+    <a href="/episodes.html" class="btn-primary">Browse All Episodes</a>
+  </div>
+
+  <!-- Episode Content -->
+  <article class="episode-detail" id="episodeDetail" style="display: none;">
+    <div class="container">
+      <!-- Back Navigation -->
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/episodes.html" class="breadcrumb-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          Back to All Episodes
+        </a>
+      </nav>
+
+      <!-- Episode Header -->
+      <header class="episode-header">
+        <div class="episode-header-content">
+          <!-- Episode Meta -->
+          <div class="episode-meta">
+            <time datetime="" id="episodeDate" class="episode-date"></time>
+            <span class="meta-separator">•</span>
+            <span class="episode-duration" id="episodeDuration"></span>
+          </div>
+
+          <!-- Episode Title -->
+          <h1 class="episode-title" id="episodeTitle"></h1>
+
+          <!-- Episode Description -->
+          <p class="episode-description" id="episodeDescription"></p>
+
+          <!-- Episode Topics -->
+          <div class="episode-topics" id="episodeTopics"></div>
+        </div>
+
+        <!-- Episode Image -->
+        <div class="episode-header-image">
+          <img src="" alt="" id="episodeImage" loading="eager">
+        </div>
+      </header>
+
+      <!-- Audio Player -->
+      <section class="episode-player-section">
+        <h2 class="sr-only">Listen to Episode</h2>
+        <div id="episodePlayer"></div>
+      </section>
+
+      <!-- Episode Info Grid -->
+      <div class="episode-info-grid">
+        <!-- Show Notes -->
+        <section class="episode-show-notes">
+          <h2 class="section-title">Show Notes</h2>
+          <div class="show-notes-content" id="showNotesContent"></div>
+        </section>
+
+        <!-- Sidebar -->
+        <aside class="episode-sidebar">
+          <!-- Hosts -->
+          <section class="episode-hosts" id="episodeHostsSection">
+            <h3 class="sidebar-title">Hosted by</h3>
+            <div class="hosts-list" id="episodeHosts"></div>
+          </section>
+
+          <!-- Guests -->
+          <section class="episode-guests" id="episodeGuestsSection" style="display: none;">
+            <h3 class="sidebar-title">Featured Guests</h3>
+            <div class="guests-list" id="episodeGuests"></div>
+          </section>
+
+          <!-- Subscribe CTA -->
+          <section class="episode-subscribe">
+            <h3 class="sidebar-title">Never Miss an Episode</h3>
+            <p class="subscribe-text">Subscribe to get new episodes delivered to your favorite podcast app.</p>
+            {% include subscribe-buttons.html %}
+          </section>
+        </aside>
+      </div>
+
+      <!-- Related Episodes -->
+      <section class="related-episodes" id="relatedEpisodesSection" style="display: none;">
+        <h2 class="section-title">Related Episodes</h2>
+        <div class="related-episodes-grid" id="relatedEpisodesGrid"></div>
+      </section>
+
+      <!-- Episode Navigation -->
+      <nav class="episode-navigation" id="episodeNavigation">
+        <a href="#" class="nav-prev" id="prevEpisode" style="display: none;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span>
+            <span class="nav-label">Previous</span>
+            <span class="nav-title" id="prevEpisodeTitle"></span>
+          </span>
+        </a>
+        <a href="#" class="nav-next" id="nextEpisode" style="display: none;">
+          <span>
+            <span class="nav-label">Next</span>
+            <span class="nav-title" id="nextEpisodeTitle"></span>
+          </span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </nav>
+    </div>
+  </article>
+</div>
+
+<script src="{{ '/assets/js/episode-detail.js' | relative_url }}"></script>

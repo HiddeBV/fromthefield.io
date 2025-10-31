@@ -136,11 +136,11 @@
 
 ### Implementation for User Story 5
 
-- [ ] T045 [P] [US5] Enhance theme toggle functionality in assets/js/main.js with smooth transitions
-- [ ] T046 [P] [US5] Create comprehensive dark mode styles in assets/css/main.css for all components
-- [ ] T047 [US5] Implement system preference detection and respect user's OS theme setting
-- [ ] T048 [US5] Add theme transition animations in assets/css/main.css to prevent jarring theme switches
-- [ ] T049 [US5] Test and refine theme consistency across all pages and components
+- [x] T045 [P] [US5] Enhance theme toggle functionality in assets/js/main.js with smooth transitions
+- [x] T046 [P] [US5] Create comprehensive dark mode styles in assets/css/main.css for all components
+- [x] T047 [US5] Implement system preference detection and respect user's OS theme setting
+- [x] T048 [US5] Add theme transition animations in assets/css/main.css to prevent jarring theme switches
+- [x] T049 [US5] Test and refine theme consistency across all pages and components
 
 **Checkpoint**: Complete theming system should work across all user stories
 

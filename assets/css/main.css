@@ -109,8 +109,16 @@ body {
   line-height: 1.6;
   color: var(--color-text-primary);
   background-color: var(--color-bg-primary);
-  transition: background-color var(--transition-speed) var(--transition-easing),
-              color var(--transition-speed) var(--transition-easing);
+}
+
+/* Theme Transition Animation
+   Apply smooth transitions only when theme is actively changing */
+html.theme-transitioning,
+html.theme-transitioning * {
+  transition: background-color 0.3s ease-in-out,
+              color 0.3s ease-in-out,
+              border-color 0.3s ease-in-out,
+              box-shadow 0.3s ease-in-out !important;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -144,6 +152,21 @@ a:focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
   border-radius: 2px;
+}
+
+/* Accessibility Utilities
+   ========================================================================== */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* Layout Components
@@ -2535,4 +2558,176 @@ a:focus-visible {
   .contact-icon {
     margin-top: 0;
   }
+}
+
+/* ==========================================================================
+   Theme Enhancements - Dark Mode Refinements
+   ========================================================================== */
+
+/* Dark Mode Specific Enhancements */
+[data-theme="dark"] {
+  /* Enhanced shadows for dark mode - more pronounced */
+  --color-shadow: rgba(0, 0, 0, 0.5);
+  --color-card-shadow: rgba(0, 0, 0, 0.3);
+}
+
+/* Dark mode image adjustments for better contrast */
+[data-theme="dark"] img {
+  opacity: 0.9;
+}
+
+[data-theme="dark"] img:hover {
+  opacity: 1;
+}
+
+/* Dark mode enhanced borders for better definition */
+[data-theme="dark"] .episode-card,
+[data-theme="dark"] .host-card,
+[data-theme="dark"] .faq-item,
+[data-theme="dark"] .form-input,
+[data-theme="dark"] .form-select,
+[data-theme="dark"] .form-textarea {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Enhanced focus states in dark mode */
+[data-theme="dark"] *:focus-visible {
+  outline-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(99, 179, 237, 0.3);
+}
+
+/* Dark mode code blocks (if any) */
+[data-theme="dark"] code,
+[data-theme="dark"] pre {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Dark mode selection styling */
+[data-theme="dark"] ::selection {
+  background: rgba(99, 179, 237, 0.3);
+  color: var(--color-text-primary);
+}
+
+/* Dark mode scrollbar (webkit browsers) */
+[data-theme="dark"] ::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Theme Toggle Button Enhanced Styles */
+.theme-toggle {
+  transition: transform 0.2s ease-in-out;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
+.theme-icon {
+  display: inline-block;
+  font-size: 1.2em;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Rotate icon on theme change */
+html.theme-transitioning .theme-icon {
+  transform: rotate(180deg);
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  html.theme-transitioning,
+  html.theme-transitioning * {
+    transition: none !important;
+  }
+  
+  .theme-icon {
+    transition: none;
+  }
+  
+  .theme-toggle {
+    transition: none;
+  }
+}
+
+/* Light mode specific enhancements */
+[data-theme="light"] {
+  /* Subtle shadows for depth */
+  --color-shadow: rgba(0, 0, 0, 0.08);
+  --color-card-shadow: rgba(0, 0, 0, 0.04);
+}
+
+/* Light mode selection styling */
+[data-theme="light"] ::selection {
+  background: rgba(49, 130, 206, 0.2);
+  color: var(--color-text-primary);
+}
+
+/* ==========================================================================
+   Accessibility Enhancements
+   ========================================================================== */
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --color-border: #000000;
+    --color-text-secondary: #000000;
+  }
+  
+  [data-theme="dark"] {
+    --color-border: #FFFFFF;
+    --color-text-secondary: #FFFFFF;
+  }
+}
+
+/* Ensure sufficient contrast for links */
+a {
+  text-decoration-skip-ink: auto;
+}
+
+/* Focus visible enhancements for all interactive elements */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Skip to content link - visible on focus */
+.skip-link:focus {
+  clip: auto;
+  height: auto;
+  width: auto;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 9999;
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--color-accent);
+  color: white;
+  text-decoration: none;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 12px var(--color-shadow);
 }

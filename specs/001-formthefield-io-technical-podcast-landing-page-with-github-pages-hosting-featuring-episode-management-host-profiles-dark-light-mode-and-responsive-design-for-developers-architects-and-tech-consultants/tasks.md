@@ -55,13 +55,13 @@
 
 ### Implementation for User Story 1
 
-- [ ] T016 [P] [US1] Create homepage hero section in index.html with podcast name, tagline, and description
-- [ ] T017 [P] [US1] Add subscription buttons component in _includes/subscribe-buttons.html for Spotify, Apple Podcasts, and RSS
-- [ ] T018 [US1] Implement latest episode display section in index.html with JavaScript data loading from _data/episodes.json
-- [ ] T019 [US1] Create Spotify embed player component in _includes/audio-player.html with fallback audio support
-- [ ] T020 [US1] Add hero section styles in assets/css/main.css with responsive design and proper typography
-- [ ] T021 [US1] Add latest episode card styles in assets/css/main.css with thumbnail, metadata, and player layout
-- [ ] T022 [US1] Implement client-side episode loading JavaScript in index.html to fetch and display latest published episode
+- [X] T016 [P] [US1] Create homepage hero section in index.html with podcast name, tagline, and description
+- [X] T017 [P] [US1] Add subscription buttons component in _includes/subscribe-buttons.html for Spotify, Apple Podcasts, and RSS
+- [X] T018 [US1] Implement latest episode display section in index.html with Liquid templating from _data/episodes.json
+- [X] T019 [US1] Create Spotify embed player component in _includes/audio-player.html with fallback audio support
+- [X] T020 [US1] Add hero section styles in assets/css/main.css with responsive design and proper typography
+- [X] T021 [US1] Add latest episode card styles in assets/css/main.css with thumbnail, metadata, and player layout
+- [X] T022 [US1] Implement episode display using Jekyll Liquid to fetch and display latest published episode
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
 

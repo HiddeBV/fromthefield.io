@@ -1,0 +1,78 @@
+<!-- Spotify Audio Player Component -->
+{% assign episode_id = include.episode_id %}
+{% assign spotify_url = include.spotify_url %}
+
+<div class="audio-player" data-episode-id="{{ episode_id }}">
+  {% if spotify_url and spotify_url != "" %}
+    <!-- Spotify Embed -->
+    <div class="spotify-player">
+      <iframe 
+        src="{{ spotify_url | replace: 'https://open.spotify.com/episode/', 'https://open.spotify.com/embed/episode/' }}"
+        width="100%" 
+        height="152" 
+        frameBorder="0" 
+        allowfullscreen="" 
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+        loading="lazy"
+        title="Spotify Podcast Player for episode {{ episode_id }}">
+      </iframe>
+    </div>
+  {% else %}
+    <!-- Fallback: No player available -->
+    <div class="player-fallback">
+      <p class="fallback-message">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        Audio player not available. Please visit our 
+        <a href="{{ site.data.site-config.subscriptions.spotify.url }}" target="_blank" rel="noopener noreferrer">Spotify page</a> 
+        to listen to this episode.
+      </p>
+    </div>
+  {% endif %}
+</div>
+
+<!-- Audio Player Initialization Script -->
+<script>
+  // Initialize audio player functionality
+  function initAudioPlayer(episodeId, spotifyUrl) {
+    const playerContainer = document.querySelector(`[data-episode-id="${episodeId}"]`);
+    if (!playerContainer) return;
+    
+    // Check if Spotify iframe is present
+    const spotifyIframe = playerContainer.querySelector('iframe');
+    if (spotifyIframe) {
+      // Add loading indicator
+      spotifyIframe.addEventListener('load', function() {
+        console.log(`Spotify player loaded for episode: ${episodeId}`);
+      });
+      
+      // Handle iframe errors
+      spotifyIframe.addEventListener('error', function() {
+        console.error(`Failed to load Spotify player for episode: ${episodeId}`);
+        showPlayerFallback(playerContainer);
+      });
+    }
+  }
+  
+  // Show fallback message if player fails to load
+  function showPlayerFallback(container) {
+    const fallbackHtml = `
+      <div class="player-fallback">
+        <p class="fallback-message">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+          Unable to load audio player. Please visit 
+          <a href="${container.dataset.spotifyUrl || '{{ site.data.site-config.subscriptions.spotify.url }}'}" target="_blank" rel="noopener noreferrer">Spotify</a> 
+          to listen to this episode.
+        </p>
+      </div>
+    `;
+    container.innerHTML = fallbackHtml;
+  }
+</script>

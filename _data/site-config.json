@@ -1,0 +1,78 @@
+{
+  "podcast": {
+    "name": "From The Field",
+    "tagline": "Life as a Consultant in Tech",
+    "description": "A technical podcast for developers, architects, and tech consultants. Real conversations about cloud architecture, DevOps, platform engineering, and the consulting life.",
+    "author": "Alex Thompson & Jordan Martinez",
+    "email": "hello@fromthefield.io",
+    "language": "en-US",
+    "copyright": "© 2024 From The Field Podcast. All rights reserved.",
+    "categories": [
+      "Technology",
+      "Business",
+      "Careers"
+    ],
+    "explicit": false
+  },
+  "subscriptions": {
+    "spotify": {
+      "url": "https://open.spotify.com/show/fromthefield",
+      "showId": "spotify_show_id_placeholder"
+    },
+    "applePodcasts": {
+      "url": "https://podcasts.apple.com/podcast/fromthefield",
+      "podcastId": "apple_podcast_id_placeholder"
+    },
+    "rss": {
+      "url": "https://fromthefield.io/feed.xml"
+    },
+    "googlePodcasts": {
+      "url": "https://podcasts.google.com/feed/fromthefield"
+    },
+    "overcast": {
+      "url": "https://overcast.fm/itunes/fromthefield"
+    }
+  },
+  "social": {
+    "twitter": "https://twitter.com/fromthefield_io",
+    "linkedin": "https://linkedin.com/company/fromthefield",
+    "github": "https://github.com/fromthefield",
+    "youtube": "https://youtube.com/@fromthefield"
+  },
+  "contact": {
+    "email": "hello@fromthefield.io",
+    "formspreeEndpoint": "https://formspree.io/f/your_form_id_here",
+    "supportEmail": "support@fromthefield.io"
+  },
+  "seo": {
+    "keywords": [
+      "technical podcast",
+      "cloud architecture",
+      "DevOps",
+      "consulting",
+      "platform engineering",
+      "Kubernetes",
+      "software architecture",
+      "tech leadership"
+    ],
+    "twitterHandle": "@fromthefield_io",
+    "ogImage": "/assets/images/og-image.jpg",
+    "favicons": {
+      "svg": "/favicon.svg",
+      "png32": "/favicon-32x32.png",
+      "png16": "/favicon-16x16.png",
+      "appleTouchIcon": "/apple-touch-icon.png"
+    }
+  },
+  "analytics": {
+    "googleAnalyticsId": "",
+    "plausibleDomain": ""
+  },
+  "features": {
+    "enableComments": false,
+    "enableNewsletter": true,
+    "enableSearch": true,
+    "enableDarkMode": true,
+    "episodesPerPage": 12
+  }
+}

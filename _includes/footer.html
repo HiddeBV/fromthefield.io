@@ -1,0 +1,97 @@
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-content">
+      <!-- Footer Brand -->
+      <div class="footer-section footer-brand">
+        <h3 class="footer-title">{{ site.title }}</h3>
+        <p class="footer-description">{{ site.tagline }}</p>
+        <p class="footer-copyright">{{ site.podcast.copyright }}</p>
+      </div>
+      
+      <!-- Quick Links -->
+      <div class="footer-section footer-links">
+        <h3 class="footer-heading">Quick Links</h3>
+        <ul class="footer-nav">
+          {% for item in site.navigation %}
+          <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+          {% endfor %}
+          <li><a href="/feed.xml">RSS Feed</a></li>
+        </ul>
+      </div>
+      
+      <!-- Subscribe -->
+      <div class="footer-section footer-subscribe">
+        <h3 class="footer-heading">Listen On</h3>
+        <div class="subscribe-buttons">
+          <a href="https://open.spotify.com/show/your-show-id" 
+             class="subscribe-btn spotify-btn" 
+             target="_blank" 
+             rel="noopener noreferrer"
+             aria-label="Listen on Spotify">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+            </svg>
+            Spotify
+          </a>
+          <a href="https://podcasts.apple.com/podcast/your-podcast-id" 
+             class="subscribe-btn apple-btn" 
+             target="_blank" 
+             rel="noopener noreferrer"
+             aria-label="Listen on Apple Podcasts">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2.182c5.423 0 9.818 4.395 9.818 9.818 0 5.423-4.395 9.818-9.818 9.818-5.423 0-9.818-4.395-9.818-9.818 0-5.423 4.395-9.818 9.818-9.818zM12 5.455c-3.614 0-6.545 2.931-6.545 6.545 0 3.614 2.931 6.545 6.545 6.545 3.614 0 6.545-2.931 6.545-6.545 0-3.614-2.931-6.545-6.545-6.545zm0 1.636c2.71 0 4.909 2.199 4.909 4.909 0 2.71-2.199 4.909-4.909 4.909-2.71 0-4.909-2.199-4.909-4.909 0-2.71 2.199-4.909 4.909-4.909zM12 9.818c-1.205 0-2.182.977-2.182 2.182v3.273c0 .301.244.545.545.545h.545c.301 0 .545-.244.545-.545V12c0-.301.244-.545.545-.545.301 0 .545.244.545.545v3.273c0 .301.244.545.545.545h.546c.301 0 .545-.244.545-.545V12c0-1.205-.977-2.182-2.182-2.182z"/>
+            </svg>
+            Apple Podcasts
+          </a>
+          <a href="/feed.xml" 
+             class="subscribe-btn rss-btn" 
+             aria-label="Subscribe via RSS">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M6.18 15.64c-1.18 0-2.18 1-2.18 2.18 0 1.2 1 2.18 2.18 2.18 1.2 0 2.18-.98 2.18-2.18 0-1.18-.98-2.18-2.18-2.18zM4 4.44v3.27c6.05 0 10.96 4.91 10.96 10.96h3.27C18.23 10.57 12.1 4.44 4 4.44zM4 10.1v3.27c3.05 0 5.52 2.47 5.52 5.52h3.27C12.79 14.01 8.88 10.1 4 10.1z"/>
+            </svg>
+            RSS Feed
+          </a>
+        </div>
+      </div>
+      
+      <!-- Social Links -->
+      <div class="footer-section footer-social">
+        <h3 class="footer-heading">Connect</h3>
+        <div class="social-links">
+          {% if site.social.links %}
+            {% for link in site.social.links %}
+              {% if link contains 'twitter' %}
+              <a href="{{ link }}" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>
+                </svg>
+              </a>
+              {% elsif link contains 'linkedin' %}
+              <a href="{{ link }}" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
+                  <circle cx="4" cy="4" r="2"/>
+                </svg>
+              </a>
+              {% elsif link contains 'github' %}
+              <a href="{{ link }}" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+              </a>
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    
+    <!-- Bottom Footer -->
+    <div class="footer-bottom">
+      <p class="footer-legal">
+        Built with <a href="https://jekyllrb.com/" target="_blank" rel="noopener">Jekyll</a> 
+        and hosted on <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>
+      </p>
+    </div>
+  </div>
+</footer>

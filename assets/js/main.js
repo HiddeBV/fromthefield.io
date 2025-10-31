@@ -47,12 +47,6 @@
     if (themeToggle) {
       const newLabel = theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode';
       themeToggle.setAttribute('aria-label', newLabel);
-      
-      // Update icon if it exists
-      const icon = themeToggle.querySelector('.theme-icon');
-      if (icon) {
-        icon.textContent = theme === 'dark' ? '☀️' : '🌙';
-      }
     }
     
     // Remove transitioning class after animation completes
@@ -104,12 +98,6 @@
     if (themeToggle) {
       const label = currentTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode';
       themeToggle.setAttribute('aria-label', label);
-      
-      // Update icon if it exists
-      const icon = themeToggle.querySelector('.theme-icon');
-      if (icon) {
-        icon.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
-      }
       
       // Add click event listener
       themeToggle.addEventListener('click', toggleTheme);
